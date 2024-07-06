@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="icon" type="image/x-icon" href="{{ MEDIA_URL }}/favicon.ico">
+    {% load static %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <script>
+        function goBack(){
+            window.history.back();
+        }
+    </script>
+    <style>
+        .my-5{
+            font-size: xx-large;
+            text-align: center;
+            margin-bottom: 400px;
+        }
+        .link{
+            font-size: x-large;
+            text-align: left;
+            margin-bottom: 200px;
+            margin-top: 200px;
+            margin-left: 100px;
+        }
+        .body{
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body class ="body">
+    <div class="container-sm">
+    <div class="container-sm my-5">
+        Title: {{ books.title }}
+    </div>
+    <div class="my-5">
+        Genre: {{ books.genre }}
+    </div>
+    <div class="my-5">
+        <img src="{{ MEDIA_URL }}/{{ books.image }}" alt="">
+    </div>
+    <div class="my-5">
+        View book:
+        <a href="{% url 'Books:viewBook' books.id %}">{{ books.title }}</a>
+    </div>
+    <div class="my-5" style="font-size: x-large;">
+        download link:
+        <a class="my-5" href="{{ MEDIA_URL }}/{{ books.book }}" download>here </a>
+    </div>
+    
+    <div class="btn btn-success my-5 float-start" onclick="goBack()">
+        Back
+    </div>
+
+
+    </div>
+    <footer class="container-sm bg-dark text-white py-3">
+        <div class="row">
+            <div class="col-sm-4 my-2">
+                <a href="{% url 'admin:login' %}" class="text-decoration-none text-white">Admin</a>
+            </div>
+            <div class="col-sm-4 my-2">
+                <a href="#" class="text-decoration-none text-white">Top</a>
+            </div>
+            <div class="col-sm-4 my-2">
+                <a href="/" class="text-decoration-none text-white">Main page</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 my-2">
+                <a href="{% url 'Books:books' %}" class="text-decoration-none text-white">Books</a>
+            </div>
+            <div class="col-sm-4 my-2">
+                <a href="{% url 'Videos:videos' %}" class="text-decoration-none text-white">Videos</a>
+            </div>
+            <div class="col-sm-4 my-2">
+                <a href="{% url 'Videos:videos' %}" class="text-decoration-none text-white">Article</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

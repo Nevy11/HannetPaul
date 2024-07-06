@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="device-width, initial-scale: 1.0">
+    <title>Home Page</title>
+    {% load static %}
+    <link rel="icon" href="{{ MEDIA_URL }}/favicon.ico" type="image/x-icon" alt="Nothing">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'myStyles/styles.css' %}">
+    <style>
+        .marq {
+            font-size: x-large;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-style: italic;
+            margin-top: 40px;
+        }
+
+        .title {
+            text-align: center;
+            color: rgb(201, 15, 139);
+            background-color: lavender;
+            font-style: italic;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-text {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .text-white {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+        }
+
+        .card {
+            background-color: white;
+        }
+        .btn{
+            background-color: deeppink;
+        }
+    </style>
+    <script>
+        function goback() {
+            window.history.back();
+        }
+        function submitArticle(id) {
+            const form = document.createElement('form');
+            form.method = 'post';
+            form.action = '{% url "Articles:result" 0 %}'.replace('0', int(id));
+            const csrfToken = document.createElement('input');
+            csrfToken.type = 'hidden';
+            csrfToken.name = 'csrfmiddlewaretoken';
+            csrfToken.value = '{{ csrf_token }}';
+            form.appendChild(csrfToken);
+            document.body.appendChild(form)
+            form.submit();
+        }
+    </script>
+</head>
+
+<body style="background-color:white">
+    <div class="bg-success" style="text-align: center;">
+        <h1 class="mx-auto">HannetPaul</h1>
+    </div>
+
+    <div class="container-sm container-lg container-md">
+        <div class="container-sm my-sm-13" style="font: bold;">
+            <marquee behavior="move" direction="right" class="marq container-sm , my-sm-3">
+                HannetPaul Article Writing
+            </marquee>
+        </div>
+
+        <div class="accordion" id="aboutAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="header_vision">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#vision"
+                        aria-expanded="true" aria-controls="vision">
+                        Vision
+                    </button>
+                </h2>
+                <div id="vision" class="accordion-collapse collapse" aria-labelledby="header_vision">
+                    <div class="accordion-body">
+                        <ul>
+                            {% for vision in visions %}
+                            <li>{{ vision.visions }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="header_goals">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#goals" aria-expanded="false" aria-controls="goals">
+                        Goals
+                    </button>
+                </h2>
+                <div id="goals" class="accordion-collapse collapse" aria-labelledby="header_goals">
+                    <div class="accordion-body">
+                        <ul>
+                            {% for vision in visions %}
+                            <li>{{ vision.goals }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="header_values">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#values" aria-expanded="false" aria-controls="values">
+                        Values
+                    </button>
+                </h2>
+                <div id="values" class="accordion-collapse collapse" aria-labelledby="header_values">
+                    <div class="accordion-body">
+                        <ul>
+                            {% for vision in visions %}
+                            <li>{{ vision.values }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h1 text-success mt-5" style="text-align: center;">
+            Groups of articles
+        </div>
+
+        <!-- Groups of articles -->
+        <div class="row my-5">
+            {% for article in articles %}
+            <div class="col-sm-6 col-md-4 my-3">
+                <div class="card h-100">
+                    <img src="{{ MEDIA_URL }}/{{ article.image }}" alt="image_unavailable" class="card-img-top">
+                    <div class="card-body">
+                        <div class="card-title">{{ article.title }}</div>
+                        <div class="card-text"> {{ article.description }} </div>
+                        <button class="btn btn-primary mt-auto">Read</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+        <div class="h1 text-success mt-5" style="text-align: center;">
+            Articles done
+        </div>
+
+        <!-- Articles done -->
+        <div class="row my-5">
+            {% for group in groups %}
+            <div class="col-sm-6 col-md-4 my-3">
+                <div class="card h-100">
+                    <img src="{{ MEDIA_URL }}/{{ group.image }}" alt="image_unavailable" class="card-img-top">
+                    <div class="card-body">
+                        <div class="card-title">{{ group.title}}</div>
+                        <div class="card-text">{{ group.text|truncatewords:10 }}</div>
+                        <a href="{% url 'Articles:result' group.id %}" class="btn btn-primary mt-auto">read</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+            
+    <!--<form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="bg-success text-white">upload</button>
+        </form> -->
+
+
+    <button onclick="goback()" class="btn btn-primary text-white">
+        Back
+    </button>
+    <!--<div class="btn btn-dark text-white float-end" onclick="goFoward()">
+        forward
+    </div>-->
+    <!-- Footer -->
+    <footer class="container-sm bg-dark ">
+        <div class="row-sm bg-dark" style="display: flex;">
+            <div class="col-sm-5 justify-content-left my-sm-4">
+                <a href="{% url 'admin:login' %}" class="text-decoration-none text-white justify-content-center">
+                    Admin</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="#" class="text-decoration-none text-white">Top</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="/" class="text-decoration-none text-white">Main page</a>
+            </div>
+        </div>
+
+        <div class="row-sm bg-dark" style="display: flex;">
+            <div class="col-sm-5 justify-content-left my-sm-4">
+                <a href="{% url 'Books:books' %}" class="text-decoration-none text-white justify-content-center"> Books</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="#" class="text-decoration-none text-white">videos</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="{% url 'Videos:videos' %}" class="text-decoration-none text-white">Article</a>
+            </div>
+        </div>
+    </footer>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width:device-width, initial-scale:1">
+    <title>Books</title>
+    <link rel="icon" type="image/x-icon" href="{{ MEDIA_URL }}/favicon.ico" alt="Nothing">
+    {% load static %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <script>
+        function goBack() {
+            window.history.back()
+        }
+        function goFoward() {
+            window.history.forward()
+        }
+    </script>
+</head>
+
+<body>
+    <div class="bg-success" style="text-align: center;">
+        <h1 class="mx-auto">HannetPaul</h1>
+    </div>
+    <div class="btn btn-dark text-white" onclick="goBack()">back</div>
+    <div class="btn btn-dark text-white float-end" onclick="goFoward()">forward</div>
+
+
+    <h2>Book List</h2>
+    <ul>
+        {% for book in books %}
+        <li>{{ book.title }} - <a href="{{ book.document.url}}">Download</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'Books:booksUploading' %}">Upload a new Book</a>
+
+
+    <footer class="container-sm bg-dark ">
+        <div class="row-sm bg-dark" style="display: flex;">
+            <div class="col-sm-5 justify-content-left my-sm-4">
+                <a href="{% url 'admin:login' %}" class="text-decoration-none text-white justify-content-center">
+                    Admin</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="#" class="text-decoration-none text-white">Top</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="/" class="text-decoration-none text-white">Main page</a>
+            </div>
+        </div>
+
+        <div class="row-sm bg-dark" style="display: flex;">
+            <div class="col-sm-5 justify-content-left my-sm-4">
+                <a href="{% url 'Books:books' %}" class="text-decoration-none text-white justify-content-center">
+                    Books</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="#" class="text-decoration-none text-white">videos</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="{% url 'Videos:videos' %}" class="text-decoration-none text-white">Article</a>
+            </div>
+        </div>
+    </footer>

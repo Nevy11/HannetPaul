@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HannetPaul</title>
+    {% load static %}
+    
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        body {
+            background-image: url('{{ MEDIA_URL}}l.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body id="body">
+    <img src="{{ MEDIA_URL}}l.jpg " alt="Image unavailable">
+    <div class="container-sm container-md container-lg my-sm-5 ms-sm-6">
+       {% for article in articles %}
+       <div>{{ article.image }}</div>
+       <img src="{{ MEDIA_URL }}/{{ article.image }}" alt="Image unavailable">-->
+       <div class="my-sm-6">{{ article.text}}</div>
+       {% endfor %}
+    </div>
+</body>

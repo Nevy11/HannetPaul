@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="icon" type="image/x-icon" href="{{ MEDIA_URL }}/favicon.ico">
+    {% load static %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+        function goForward() {
+            window.history.forward();
+        } /*
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function () {
+                    // Get the target collapse element ID from the href attribute of the clicked link
+                    let targetId = this.getAttribute('href');
+                    let targetCollapse = document.querySelector(targetId);
+
+                    // Toggle the visibility of the target collapse element
+                    targetCollapse.classList.toggle('show');
+
+                    // Hide other collapse elements
+                    document.querySelectorAll('.collapse').forEach(collapse => {
+                        if (collapse !== targetCollapse && collapse.classList.contains('show')) {
+                            collapse.classList.remove('show');
+                        }
+                    });
+                });
+            });
+        });
+*/
+    </script>
+    
+    <style>
+        .collapse {
+            transition-duration: 0.5s;
+        }
+
+        .card-img-left {
+            width: 40%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header1{
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-success text-center">
+        <h1 class="mx-auto">HannetPaul</h1>
+    </div>
+    <div class="container-sm my-3">
+        <button class="btn btn-dark text-white mb-2" onclick="goBack()">Back</button>
+        <button class="btn btn-dark text-white float-end mb-2" onclick="goForward()">Forward</button>
+{%comment%}
+        <nav class="navbar navbar-expand-sm bg-ifo justify-content-center">
+            <div class="container-fluid">
+                <!-- Links -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-info" href="#top" data-bs-toggle="collapse">Top books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#trending" data-bs-toggle="collapse">Trending</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#latest" data-bs-toggle="collapse">Latest</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- All books-->
+        <div class="bg-info collapse active" id="top">
+            <div class="row">
+                {% for book in books %}
+                <div class="col-12 mb-3">
+                    <a href="{% url 'Books:novel' book.id %}" class="text-decoration-none text-dark">
+                    <div class="card flex-row">
+                        <img src="{{ MEDIA_URL }}{{ book.image }}" class="card-img-left" alt="Image unavailable">
+                        <div class="card-body">
+
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text">{{ book.genre }}</p>
+
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Trending -->
+        <div class="bg-dark collapse" id="trending">
+            <div class="row">
+
+                {% for book in books %}
+
+                <div class="col-12 mb-3">
+                    <div>{{ book.id }}</div>
+                    <div class="card flex-row">
+                        <img src="{{ MEDIA_URL }}{{ book.image }}" class="card-img-left" alt="Image unavailable">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text">{{ book.genre }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Latest -->
+        <div class="bg-dark collapse" id="latest">
+            <div class="row">
+                {% for book in books %}
+                <div class="col-12 mb-3">
+                    <div class="card flex-row">
+                        <img src="{{ MEDIA_URL }}{{ book.image }}" class="card-img-left" alt="Image unavailable">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text">{{ book.genre }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row-sm">
+            {% for u in  %}
+            <div class="col-sm-4">
+                {{ u }}
+            </div>
+            {% endfor %}
+        </div>
+{%endcomment%}
+        <div class="container-sm mx-auto h-1 my-3">
+            <h1 class="my-5 header1" style="text-align: center;">books</h1>
+        </div>
+        <!-- All books-->
+        <div class="bg-info">
+            <div class="row">
+                {% for book in books %}
+                <div class="col-12 mb-3">
+                    <a href="{% url 'Books:novel' book.id %}" class="text-decoration-none text-dark">
+                    <div class="card flex-row">
+                        <img src="{{ MEDIA_URL }}{{ book.image }}" class="card-img-left" alt="Image unavailable">
+                        <div class="card-body">
+
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text">{{ book.genre }}</p>
+
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Uploading button -->
+        <div class="text-center my-3">
+            <a href="{% url 'Books:booksUploading' %}"
+                class="btn btn-success text-decoration-none text-white">Upload</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="container-sm bg-dark text-white py-3">
+        <div class="row">
+            <div class="col-sm-4 my-2">
+                <a href="{% url 'admin:login' %}" class="text-decoration-none text-white">Admin</a>
+            </div>
+            <div class="col-sm-4 my-2">
+                <a href="#" class="text-decoration-none text-white">Top</a>
+            </div>
+            <div class="col-sm-4 my-2">
+                <a href="/" class="text-decoration-none text-white">Main page</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 my-2">
+                <a href="{% url 'Books:books' %}" class="text-decoration-none text-white">Books</a>
+            </div>
+            <div class="col-sm-4 my-2">
+                <a href="{% url 'Videos:videos' %}" class="text-decoration-none text-white">Videos</a>
+            </div>
+            <div class="col-sm-4 my-2">
+                <a href="{% url 'Videos:videos' %}" class="text-decoration-none text-white">Article</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

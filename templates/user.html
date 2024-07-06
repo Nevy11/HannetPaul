@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HannetPaul</title>
+    <link rel="icon" href="{{ MEDIA_URL }}/favicon.ico" type="image/x-icon" alt="Nothing">
+    {% load static %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        .choice {
+            text-align: center;
+            background-color: lavender;
+
+        }
+
+        .header1 {
+            text-align: center;
+
+        }
+
+        .footer {
+            text-align: center;
+        }
+
+        .links {
+            color: black;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin-top: 50px;
+            font-size: 200px;
+        }
+
+        .header2 {
+            text-align: center;
+            font-style: italic;
+        }
+
+        .statement {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-success header1">
+        <h1 class="mx-auto">HannetPaul</h1>
+    </div>
+    <div class="my-sm-3 container-sm h2 header2">
+        Section
+    </div>
+    <div class="choice container-sm bg-danger mx-auto my-sm-5">
+        <a href="{% url 'Articles:articles' %}" class="links text-decoration-none h3 mt-5" style="margin-top:200px;">
+            Articles
+        </a>
+    </div>
+    <div class="choice container-sm bg-danger my-sm-5 ">
+        <a href="{% url 'Books:books' %}" class="links text-decoration-none h3 ">
+                Books
+        </a>
+    </div>
+    <div class="choice container-sm bg-danger my-sm-5 ">
+        <a href="{% url 'Videos:videos' %}" class="links text-decoration-none h3 ">
+                Videos
+        </a>
+    </div>
+    <div class="footer">
+        <div class="container-sm my-sm-5 links" style="font-size: x-large;">
+            If you are intrested in Making the contents and you are the admin
+            please Enter the writer else User
+        </div>
+        <footer class=" bg-dark text-white container-sm">
+            <ul class="">
+                <li>
+                    <a href="{% url 'Home:choice' %}" class="lower-links text-decoration-none text-white">Back to main</a>
+                </li>
+                <li>
+                    <a href="#" class="lower-links text-decoration-none text-white">Developer products</a>
+                </li>
+            </ul>
+        </footer>
+    </div>
+</body>
+
+</html>

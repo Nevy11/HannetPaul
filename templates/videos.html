@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Videos</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load crispy_forms_tags %}
+    <style>
+        .h1 {
+            text-align: center;
+        }
+        .col-sm-6 {
+            display: flex;
+            flex-direction: column;
+        }
+        .card{
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .card-body{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .video-container {
+            max-width: 100%;
+            max-height: 300px;
+            overflow: hidden;
+            
+        }
+        .video-container video {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white">
+    <div class="h1 container-sm">
+        Videos
+    </div>
+    <div class="container-sm">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-info text-dark">
+                Upload
+            </button>
+        </form>
+        <div class="row">
+            {% for video in videos %}
+            <div class="col-sm-6 my-5">
+                <div class="card">
+                    <div class="card-body bg-dark">
+                        <div class="video-container">
+                            <video class="h-100" src="{{ video.video.url }}" controls loop muted autoplay></video>
+                        </div>
+                        <div class="text-success">{{ video.title }}</div>
+                        <div class="text-success">{{ video.description }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Footer -->
+    <footer class="container-sm bg-dark ">
+        <div class="row-sm bg-dark" style="display: flex;">
+            <div class="col-sm-5 justify-content-left my-sm-4">
+                <a href="{% url 'admin:login' %}" class="text-decoration-none text-white justify-content-center">
+                    Admin</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="#" class="text-decoration-none text-white">Top</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="/" class="text-decoration-none text-white">Main page</a>
+            </div>
+        </div>
+
+        <div class="row-sm bg-dark" style="display: flex;">
+            <div class="col-sm-5 justify-content-left my-sm-4">
+                <a href="{% url 'Books:books' %}" class="text-decoration-none text-white justify-content-center"> Books</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="#" class="text-decoration-none text-white">videos</a>
+            </div>
+            <div class="col-sm-5 my-sm-4">
+                <a href="{% url 'Videos:videos' %}" class="text-decoration-none text-white">Article</a>
+            </div>
+        </div>
+    </footer>
+
+    </div>
+</body>
+</html>
